@@ -19,10 +19,22 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Pokemon">
+        <Stack.Screen
+          name="Pokemon"
+          options={{
+            title: 'Pokemons',
+            headerStyle: {},
+          }}>
           {props => <HomeScreen {...props} component={HomeScreen} />}
         </Stack.Screen>
-        <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={{
+            headerBackTitle: '',
+            title: 'Pokemon',
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

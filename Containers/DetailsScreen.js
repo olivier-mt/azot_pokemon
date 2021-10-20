@@ -10,7 +10,9 @@ import {
   Image,
   TouchableHighlight,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
 
 import {useGetPokemonByNameQuery} from '../services/pokemon';
 
@@ -22,29 +24,37 @@ const DetailsScreen = ({route}) => {
   const {data, error, isLoading} = useGetPokemonByNameQuery(name);
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>{name}</Text>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        //justifyContent: 'center'
+      }}>
       {error ? (
         <Text>Oh no, there was an error</Text>
       ) : isLoading ? (
-        <Text>Loading...</Text>
+        <View style={styles.main}>
+          <ActivityIndicator size="large" color="red" />
+        </View>
       ) : data ? (
-        <View>
-          {
-            <Image
-              source={{
-                uri: toggle
-                  ? data.sprites.front_default
-                  : data.sprites.back_default,
-              }}
-              alt={data.species.name}
-              style={{width: 200, height: 200}}
-            />
-          }
-          <TouchableOpacity
-            style={{width: 50, height: 50, backgroundColor: 'red'}}
-            onPress={() => setToggle(!toggle)}
+        <View style={styles.main}>
+          <Text style={styles.textAppearence}>{name}</Text>
+
+          <Image
+            source={{
+              uri: toggle
+                ? data.sprites.front_default
+                : data.sprites.back_default,
+            }}
+            alt={data.species.name}
+            style={{width: 200, height: 200}}
           />
+
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => setToggle(!toggle)}>
+            {/*<Ionicons name="ios-arrow-redo-outline" size={24} color="black" />*/}
+          </TouchableOpacity>
         </View>
       ) : null}
     </View>
@@ -52,3 +62,27 @@ const DetailsScreen = ({route}) => {
 };
 
 export default DetailsScreen;
+
+const btnSize = 50;
+
+const styles = StyleSheet.create({
+  main: {
+    // backgroundColor: 'blue',
+    margin: 20,
+    height: 300,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  textAppearence: {
+    color: 'black',
+    fontSize: 25,
+  },
+
+  btn: {
+    width: btnSize,
+    height: btnSize,
+    backgroundColor: 'red',
+    borderRadius: btnSize / 2,
+  },
+});
