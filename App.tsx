@@ -31,8 +31,8 @@ const App = () => {
           name="Details"
           component={DetailsScreen}
           options={{
-            headerBackTitle: '',
-            title: 'Pokemon',
+            headerBackTitle: 'Pokemon',
+            title: null,
           }}
         />
       </Stack.Navigator>
