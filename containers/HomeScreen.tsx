@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {useGetFirstPokemonQuery} from '../services/pokemon';
+import PokemonBtn from '../components/PokemonBtn';
 
 import {
   SafeAreaView,
@@ -11,8 +12,6 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-
-import PokemonBtn from '../Components/PokemonBtn';
 
 const HomeScreen = ({navigation}) => {
   const {data, error, isLoading} = useGetFirstPokemonQuery('100');
